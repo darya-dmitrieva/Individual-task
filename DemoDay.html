@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> 
+            Demo day
+        </title>
+        <meta charset="utf-8"/>
+    </head>
+    <body>
+        <script>
+            'use strict'
+            let m, n;
+
+            while (true) {
+                m = +prompt('Введите размерность матрицы A1(M, M)');
+                n = +prompt('Введите размерность матрицы А2(N, N)');
+
+                if (m == 0 || n == 0) alert('Размерности не могут быть равны 0');
+                else if ((m % 2 != 0) || (n % 2 != 0)) alert ('Размерность должны быть четными');
+                else break;
+            }
+
+            let n1 = m;
+            let m1 = n;
+            let min = 0;
+            let max = 100;
+            let randomNumber;
+
+            let A1 = [];
+            let A3 = [];
+            for (let i = 0; i < m; i++) {
+                A1[i] = [];
+                A3[i] = [];
+                for (let j = 0; j < n1; j++) {
+                    randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+                    A1[i][j] = randomNumber;
+                    A3[i][j] = randomNumber;
+                }
+            }
+            
+            let A2 = [];
+            let A4 = [];
+            let A6 = [];
+            for (let i = 0; i < m1; i++) {
+                A2[i] = [];
+                A4[i] = [];
+                A6[i] = [];
+                for (let j = 0; j < n; j++) {
+                    randomNumber = Math.floor(Math.random() * (max - min + 1) + min);
+                    A2[i][j] = randomNumber;
+                    A4[i][j] = randomNumber;
+                    A6[i][j] = randomNumber;
+                }
+            }
+
+            console.log(A1);
+            console.log(A2);
+
+            for (let i = 0; i < n1 - 1; i++) {
+                for (let j = i + 1; j < n1; j++) {
+                    if (A3[j][n1-1-j] > A3[i][n1-1-i]) {
+                        let item = A3[j][n1-1-j];
+                        A3[j][n1-1-j] = A3[i][n1-1-i];
+                        A3[i][n1-1-i] = item;
+                    }
+                }
+            }
+
+            console.log(A3);
+
+            for (let i = 0; i < n - 1; i++) {
+                for (let j = i + 1; j < n; j++) {
+                    if (A4[j][n-1-j] > A4[i][n-1-i]) {
+                        let item2 = A4[j][n-1-j];
+                        A4[j][n-1-j] = A4[i][n-1-i];
+                        A4[i][n-1-i] = item2;
+                    }
+                }
+            }
+            console.log(A4)
+
+            let A5 = [];
+            for (let i = 0; i < A3.length; i++) {
+                A5[i] = [];
+                let maximum = Math.max(...A1[i]);
+                let item;
+                let resultItem;
+                for (let j = 0; j < n1; j++) {
+                    item = A3[i][j];
+                    resultItem = item - maximum;
+                    A5[i][j] = resultItem;
+                }
+            }
+            console.log(A5);
+            
+            for (let i = 0; i < A2.length; i++) {
+                let mini = A2[0][0];
+                let item;
+                let resultItem;
+                for (let j = 0; j < A2[i].length; j++) {
+                    if (A2[j][i] < mini) {
+                        mini = A2[j][i];
+                    }
+                    item = A4[j][i];
+                    resultItem = item + mini;
+                    A6[j][i] = resultItem;
+                }
+            }
+            console.log(A6);
+        </script>
+    </body>
+</html>
